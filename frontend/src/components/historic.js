@@ -1,4 +1,5 @@
 import React from "react";
+import ReactInputDateMask from 'react-input-date-mask';
 
 const Historic = (props) => {
   const { isSearching, onDateChange } = props;
@@ -20,11 +21,12 @@ const Historic = (props) => {
             strokeLinejoin="round"
           ></path>
         </svg>
+        
         <input
           type="search"
           role="search"
           onChange={onDateChange}
-          placeholder="Search for a location"
+          placeholder="Search for a date"
           className="w-48 md:w-96 mr-8 dark:bg-black dark:text-white outline-none placeholder-gray-500 dark:placeholder-white"
         />
         {isSearching ? (

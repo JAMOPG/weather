@@ -19,9 +19,9 @@ class LocationView(APIView):
         except Location.DoesNotExist:
             return Response(
                 {"message": "No locations registered."},
-                 status=status.HTTP_400_BAD_REQUEST)
+                 status=hstatus.HTTP_400_BAD_REQUEST)
         serialized = LocationSerializer(locations, many=True)
-        return Response(serialized.data, status=status.HTTP_200_OK)
+        return Response(serialized.data, status=hstatus.HTTP_200_OK)
     
     
 @api_view(['GET'])

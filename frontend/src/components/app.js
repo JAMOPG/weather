@@ -13,7 +13,7 @@ import UnitsToggle from "./units-toggle";
 const searchTimeoutInMs = 500;
 
 export default function App() {
-  const [location, setLocation] = React.useState("Araraquara");
+  const [location, setLocation] = React.useState("");
   const [debouncedSearchTerm, setDebouncedSearchTerm] = React.useState("");
   const [isSearching, setIsSearching] = React.useState(false);
   const [units, setUnits] = React.useState("metric");
@@ -58,10 +58,11 @@ export default function App() {
                   isSearching={isSearching}
                   onLocationChange={handleLocationChange}
                 />
+                {location !== '' ? 
                 <div className="shadow-lg rounded-lg h-auto overflow-hidden w-full md:w-3/5 lg:w-1/2 m-auto mt-4 divide-y-2 divide-light-blue-400">
                   <WeatherCard location={location} units={units} />
                   <ForecastCard location={location} units={units} />
-                </div>
+                </div>: ""}
                 <UnitsToggle units={units} onUnitsChange={handleUnitsChange} />
                 <Footer />
               </div>
