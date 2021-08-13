@@ -1,3 +1,4 @@
+from historics.models import Historic
 from django.shortcuts import render
 import requests
 import json
@@ -34,11 +35,13 @@ def forecast(request):
                   'appid': OPENWEATHER_API_KEY}
         url = OPENWEATHER_API_URL+'/forecast'
         response = requests.get(url=url, params=params)
-        status = hstatus.HTTP_200_OK if response.status_code == 200 else hstatus.HTTP_404_NOT_FOUND
-        response = json.loads(response.content)
     except APIException as e:
         print(e)
         return Response(e)    
+    
+    status = hstatus.HTTP_200_OK if response.status_code == 200 else hstatus.HTTP_404_NOT_FOUND
+    response = json.loads(response.content)
+    
     return Response(response, status=status)
 
 
@@ -52,9 +55,16 @@ def weather(request):
                   'appid': OPENWEATHER_API_KEY}
         url = OPENWEATHER_API_URL+'/weather'
         response = requests.get(url=url, params=params)
-        status = hstatus.HTTP_200_OK if response.status_code == 200 else hstatus.HTTP_404_NOT_FOUND
-        response = json.loads(response.content)
     except APIException as e:
         print(e)
         return Response(e)    
+    try:
+        db_location = Location.objects.filter(city=location).last()
+        historic = Historic(location=db_location)
+        historic.save()
+    except Exception as e:
+        pass    
+    status = hstatus.HTTP_200_OK if response.status_code == 200 else hstatus.HTTP_404_NOT_FOUND
+    response = json.loads(response.content)
+    
     return Response(response, status=status)

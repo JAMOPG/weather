@@ -1,7 +1,7 @@
 import React from "react";
 
-const Search = (props) => {
-  const { isSearching, onLocationChange } = props;
+const SearchH = (props) => {
+  const { isSearching, onDateChange } = props;
 
   return (
     <div className="w-4/5 md:w-3/5 lg:w-1/2 m-auto">
@@ -23,8 +23,8 @@ const Search = (props) => {
         <input
           type="search"
           role="search"
-          onChange={onLocationChange}
-          placeholder="Search for a location"
+          onChange={onDateChange}
+          placeholder="Search for a date"
           className="w-48 md:w-96 mr-8 dark:bg-black dark:text-white outline-none placeholder-gray-500 dark:placeholder-white"
         />
         {isSearching ? (
@@ -34,7 +34,7 @@ const Search = (props) => {
             fill="none"
             viewBox="0 0 24 24"
           >
-            <title>Search for a location</title>
+            <title>Search for a date</title>
             <circle
               className="opacity-25"
               cx="12"
@@ -56,4 +56,4 @@ const Search = (props) => {
   );
 };
 
-export default Search;
+export default SearchH;

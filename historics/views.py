@@ -26,8 +26,12 @@ class HistoricView(APIView):
 def search_date(request):
     try:
         date = request.GET.get('date', None)
-      
+        data = {
+            "user": "teste",
+            "city": "teste",
+            "date": "12/12/2020"
+        }
     except APIException as e:
         print(e)
         return Response(e)    
-    return Response()    
+    return Response(data, status=hstatus.HTTP_200_OK)    

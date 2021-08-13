@@ -5,7 +5,7 @@ import fetcher from "../lib/fetcher";
 import * as recommendations from "../recommendations";
 import * as weatherIcons from "../icons";
 
-const apiUrl = "api/locations";
+const apiUrl = "http://localhost:8000/api/locations";
 const iconPrefix = `wi wi-`;
 
 export function useWeather(endpoint, location, units) {
@@ -15,6 +15,7 @@ export function useWeather(endpoint, location, units) {
   );
 
   if (endpoint === "weather") {
+    debugger;
     return {
       weather: data?.weather ? mapResponseProperties(data) : null,
       isLoading: !data && !error,

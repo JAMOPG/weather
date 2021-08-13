@@ -6,17 +6,19 @@ import Historic from "./historic";
 import Footer from "./footer";
 import NavBar from "./navbar";
 import Search from "./search";
+import SearchH from "./search-historic";
 import ForecastCard from "./forecast-card";
 import WeatherCard from "./weather-card";
 import UnitsToggle from "./units-toggle";
 
-const searchTimeoutInMs = 500;
-
 export default function App() {
   const [location, setLocation] = React.useState("");
+  const [date, setDate] = React.useState("");
   const [debouncedSearchTerm, setDebouncedSearchTerm] = React.useState("");
   const [isSearching, setIsSearching] = React.useState(false);
   const [units, setUnits] = React.useState("metric");
+
+  const searchTimeoutInMs = 2500;
 
   const debounceSearch = React.useMemo(
     () =>
@@ -25,6 +27,14 @@ export default function App() {
       }, searchTimeoutInMs),
     []
   );
+
+  const handleDateChange = (event) => {
+    const query = event.target.value.trim();
+    if (query) {
+      setIsSearching(true);
+    }
+    debounceSearch(query);
+  };
 
   const handleLocationChange = (event) => {
     const query = event.target.value.trim();
@@ -41,6 +51,7 @@ export default function App() {
   React.useEffect(() => {
     if (debouncedSearchTerm) {
       setLocation(debouncedSearchTerm);
+      setDate(debouncedSearchTerm);
       setIsSearching(false);
     }
   }, [debouncedSearchTerm]);
@@ -58,18 +69,37 @@ export default function App() {
                   isSearching={isSearching}
                   onLocationChange={handleLocationChange}
                 />
-                {location !== '' ? 
-                <div className="shadow-lg rounded-lg h-auto overflow-hidden w-full md:w-3/5 lg:w-1/2 m-auto mt-4 divide-y-2 divide-light-blue-400">
-                  <WeatherCard location={location} units={units} />
-                  <ForecastCard location={location} units={units} />
-                </div>: ""}
+                {location !== "" ? (
+                  <div className="shadow-lg rounded-lg h-auto overflow-hidden w-full md:w-3/5 lg:w-1/2 m-auto mt-4 divide-y-2 divide-light-blue-400">
+                    <WeatherCard location={location} units={units} />
+                    <ForecastCard location={location} units={units} />
+                  </div>
+                ) : (
+                  ""
+                )}
                 <UnitsToggle units={units} onUnitsChange={handleUnitsChange} />
                 <Footer />
               </div>
             </main>
           </Route>
           <Route exact path="/historic">
-            <Historic />
+            <main>
+              <div className="mx-auto w-5/6 md:w-full 2xl:max-w-7xl xl:max-w-6xl">
+                <SearchH
+                  date={date}
+                  isSearching={isSearching}
+                  onDateChange={handleDateChange}
+                />
+                {date !== "" ? (
+                  <div className="shadow-lg rounded-lg h-auto overflow-hidden w-full md:w-3/5 lg:w-1/2 m-auto mt-4 divide-y-2 divide-light-blue-400">
+                    <Historic dated={date} />
+                  </div>
+                ) : (
+                  ""
+                )}
+                <Footer />
+              </div>
+            </main>
           </Route>
         </Switch>
       </Router>
