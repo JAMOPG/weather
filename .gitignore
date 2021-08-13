@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 locations/models.py
 .vscode/launch.json
+frontend/node_modules
