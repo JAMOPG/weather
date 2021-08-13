@@ -11,7 +11,7 @@ export function useHistoric(endpoint, dated) {
 
   if (endpoint === "search_date") {
     return {
-      search_date: data ,
+      search_date: data,
       isLoading: !data && !error,
       isError: error,
     };
@@ -28,6 +28,6 @@ function mapResponseProperties(data) {
   Object.entries(mapped).map(
     ([key, value]) => value === undefined && delete mapped[key]
   );
-  
+
   return mapped;
 }

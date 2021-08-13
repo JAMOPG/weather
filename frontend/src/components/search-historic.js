@@ -3,7 +3,6 @@ import InputMask from "react-input-mask";
 
 const SearchH = (props) => {
   const { isSearching, onDateChange } = props;
-  
 
   return (
     <div className="w-4/5 md:w-3/5 lg:w-1/2 m-auto">
@@ -22,11 +21,14 @@ const SearchH = (props) => {
             strokeLinejoin="round"
           ></path>
         </svg>
-        <InputMask mask="99/99/9999" type="search"
+        <InputMask
+          mask="99/99/9999"
+          type="search"
           role="search"
           onChange={onDateChange}
           placeholder="Search for a date Ex: 01/10/2021"
-          className="w-48 md:w-96 mr-8 dark:bg-black dark:text-white outline-none placeholder-gray-500 dark:placeholder-white" />
+          className="w-48 md:w-96 mr-8 dark:bg-black dark:text-white outline-none placeholder-gray-500 dark:placeholder-white"
+        />
         {/* <input
           type="search"
           role="search"
@@ -62,7 +64,5 @@ const SearchH = (props) => {
     </div>
   );
 };
-
-
 
 export default SearchH;
