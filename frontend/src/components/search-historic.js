@@ -1,7 +1,9 @@
 import React from "react";
+import InputMask from "react-input-mask";
 
 const SearchH = (props) => {
   const { isSearching, onDateChange } = props;
+  
 
   return (
     <div className="w-4/5 md:w-3/5 lg:w-1/2 m-auto">
@@ -20,13 +22,18 @@ const SearchH = (props) => {
             strokeLinejoin="round"
           ></path>
         </svg>
-        <input
+        <InputMask mask="99/99/9999" type="search"
+          role="search"
+          onChange={onDateChange}
+          placeholder="Search for a date Ex: 01/10/2021"
+          className="w-48 md:w-96 mr-8 dark:bg-black dark:text-white outline-none placeholder-gray-500 dark:placeholder-white" />
+        {/* <input
           type="search"
           role="search"
           onChange={onDateChange}
-          placeholder="Search for a date"
+          placeholder="Search for a date Ex: 01/10/2021"
           className="w-48 md:w-96 mr-8 dark:bg-black dark:text-white outline-none placeholder-gray-500 dark:placeholder-white"
-        />
+        /> */}
         {isSearching ? (
           <svg
             className="animate-spin mt-1 -ml-1 h-5 w-5 text-indigo-700 dark:text-gray-500"
@@ -34,7 +41,7 @@ const SearchH = (props) => {
             fill="none"
             viewBox="0 0 24 24"
           >
-            <title>Search for a date</title>
+            <title>Search for a date </title>
             <circle
               className="opacity-25"
               cx="12"
@@ -55,5 +62,7 @@ const SearchH = (props) => {
     </div>
   );
 };
+
+
 
 export default SearchH;

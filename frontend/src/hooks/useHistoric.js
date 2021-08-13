@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import fetcher from "../lib/fetcher";
 
-const apiUrl = "http://localhost:8000/api/historics";
+const apiUrl = "api/historics";
 
 export function useHistoric(endpoint, dated) {
   const { data, error } = useSWR(
@@ -11,7 +11,7 @@ export function useHistoric(endpoint, dated) {
 
   if (endpoint === "search_date") {
     return {
-      search_date: data?.user ? mapResponseProperties(data) : null,
+      search_date: data ,
       isLoading: !data && !error,
       isError: error,
     };
@@ -28,6 +28,6 @@ function mapResponseProperties(data) {
   Object.entries(mapped).map(
     ([key, value]) => value === undefined && delete mapped[key]
   );
-  console.log(mapped);
+  
   return mapped;
 }

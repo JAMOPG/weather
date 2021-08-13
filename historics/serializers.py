@@ -3,7 +3,8 @@ from historics.models import Historic
 
 
 class HistoricSerializer(serializers.ModelSerializer):
-    city = serializers.ReadOnlyField(source='locations.city')
+    city = serializers.ReadOnlyField(source='location.city')
+    date = serializers.DateTimeField(format="%d/%m/%Y", source='created_at')
     class Meta:
         model = Historic
-        fields = ['user', 'created_at', 'city']
+        fields = ['user', 'city', 'date']

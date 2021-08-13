@@ -4,9 +4,9 @@ import Loading from "./loading";
 
 const Historic = ({ dated }) => {
   const { search_date, isLoading, isError } = useHistoric("search_date", dated);
+  
 
   if (isLoading || isError) return <Loading />;
-  debugger;
   return (
     <table className="table table-striped ">
       <thead class="thead-light">
@@ -17,16 +17,13 @@ const Historic = ({ dated }) => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>{search_date.user}</td>
-          <td>{search_date.user}</td>
-          <td>{search_date.user}</td>
-        </tr>
-        <tr>
-          <td>{search_date.user}</td>
-          <td>{search_date.user}</td>
-          <td>{search_date.user}</td>
-        </tr>
+      {search_date.map(function(d, idx){
+         return (<tr><td>{d.user}</td>
+                <td>{d.city}</td>
+                <td>{d.date}</td>
+                </tr>)
+       })}
+       
       </tbody>
     </table>
   );
