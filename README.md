@@ -36,6 +36,10 @@ pip install -r requirements.txt
 # ✅  Configuration
 The configurations of DB need to be inputed at  "DATABASES" key inside weather/settings.py
 Run: ./manage.py migrate #To create database structure but without cities in the table locations_location
+Import Locations: use city.list-data.csv and import locations to locations_location table
+
+OR:
+
 Recommended: Create DB into your server and Restore de file "DB_to_restore.backup" with all cities of OpenWeather already in the table locations_location
 
 
