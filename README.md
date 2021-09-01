@@ -1,5 +1,5 @@
 # ✅ Project 
-# weather-linx
+# weather
 Linx Challenge
 
 
